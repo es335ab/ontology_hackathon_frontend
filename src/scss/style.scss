@@ -17,12 +17,16 @@ p,
 ul,
 ol,
 li,
-div {
+div,
+a {
   margin: 0;
   padding: 0;
+  color: #345;
 }
 
-
+a {
+  text-decoration: none;
+}
 
 // modules
 .m-heading1 {
@@ -101,6 +105,7 @@ div {
 
 .m-cassette {
   border-bottom: 1px solid #dddddd;
+  display: block;
 
   > .inner {
     padding: 10px;
@@ -114,6 +119,14 @@ div {
     padding-top: 5px;
     font-weight: normal;
     font-size: 12px;
+  }
+
+  .qr-wrapper {
+    width: 80px;
+
+    canvas {
+      width: 80px;
+    }
   }
 }
 

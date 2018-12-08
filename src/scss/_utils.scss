@@ -46,3 +46,15 @@
 .u-border-none {
   border: none !important;
 }
+
+// table
+.u-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+
+  > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
