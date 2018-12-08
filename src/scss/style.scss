@@ -28,6 +28,10 @@ a {
   text-decoration: none;
 }
 
+input[type="text"]:focus {
+  outline: 0;
+}
+
 // modules
 .m-heading1 {
 
@@ -71,7 +75,8 @@ a {
   }
 }
 
-.mod-input-text {
+.mod-input-text,
+.mod-input-textarea {
   width: 100%;
   border: 1px solid #e1e2e3;
   background-color: #fff;
@@ -83,7 +88,8 @@ a {
   overflow: hidden;
   box-sizing: border-box;
 
-  input {
+  input,
+  textarea {
     padding-top: 8px;
     padding-bottom: 8px;
     border: none;

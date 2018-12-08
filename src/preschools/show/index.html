@@ -10,7 +10,7 @@
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="/scripts/lib/browser.js"></script>
   <script src="/scripts/utils.js"></script>
@@ -56,8 +56,8 @@
               <div class="lead"><%- item['name'] %></div>
               <div class="supplyment"><%- item['address'] %></div>
             </div>
-            <div class="qr-wrapper">
-            </div>
+<!--             <div class="qr-wrapper">
+            </div> -->
           </div>
         </div>
       </a>
@@ -71,16 +71,16 @@
     // var parameters = [{ type: 'Integer', value: 5 }, { type: 'Integer', value: 4 }];
     // var gasPrice = 500;
     // var gasLimit = 30000;
-    function attachQR() {
-      $('#js-childminders').find('.m-cassette').each(function(index, element) {
-        var $element = $(element);
-        var url = $element.attr('href');
+    // function attachQR() {
+    //   $('#js-childminders').find('.m-cassette').each(function(index, element) {
+    //     var $element = $(element);
+    //     var url = $element.attr('href');
 
-        $element.find('.qr-wrapper').qrcode({
-          text: url
-        });
-      });
-    }
+    //     $element.find('.qr-wrapper').qrcode({
+    //       text: url
+    //     });
+    //   });
+    // }
 
 
     // init
@@ -105,7 +105,7 @@
     setTimeout(function() {
       utils.render(dummyChildminders, '#js-childminder-template', '#js-childminders');
       utils.loadingOff();
-      attachQR();
+      // attachQR();
     }, 300);
   </script>
 </body>
