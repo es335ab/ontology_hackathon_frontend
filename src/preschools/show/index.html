@@ -65,48 +65,50 @@
   </script>
 
   <script>
-    // setting
-    // var contract = '39f3fb644842c808828817bd73da0946d99f237f';
-    // var method = 'Hello';
-    // var parameters = [{ type: 'Integer', value: 5 }, { type: 'Integer', value: 4 }];
-    // var gasPrice = 500;
-    // var gasLimit = 30000;
-    // function attachQR() {
-    //   $('#js-childminders').find('.m-cassette').each(function(index, element) {
-    //     var $element = $(element);
-    //     var url = $element.attr('href');
+    (function(){
+      // setting
+      // var contract = '39f3fb644842c808828817bd73da0946d99f237f';
+      // var method = 'Hello';
+      // var parameters = [{ type: 'Integer', value: 5 }, { type: 'Integer', value: 4 }];
+      // var gasPrice = 500;
+      // var gasLimit = 30000;
+      // function attachQR() {
+      //   $('#js-childminders').find('.m-cassette').each(function(index, element) {
+      //     var $element = $(element);
+      //     var url = $element.attr('href');
 
-    //     $element.find('.qr-wrapper').qrcode({
-    //       text: url
-    //     });
-    //   });
-    // }
+      //     $element.find('.qr-wrapper').qrcode({
+      //       text: url
+      //     });
+      //   });
+      // }
 
 
-    // init
-    utils.loadingOn();
+      // init
+      utils.loadingOn();
 
-    // TODO ここをcontractのメソッド呼び出しに変える
-    //      メソッドの戻り値を配列に入れる
-    var dummyChildminders = [
-      {
-        name: '阿部 太郎',
-        address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
-      },
-      {
-        name: '片桐 二郎',
-        address: '0x26007D2d96fBF35175CbBd613f6B575C2de8E20A'
-      },
-      {
-        name: '大谷 翔平',
-        address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
-      }
-    ];
-    setTimeout(function() {
-      utils.render(dummyChildminders, '#js-childminder-template', '#js-childminders');
-      utils.loadingOff();
-      // attachQR();
-    }, 300);
+      // TODO ここをcontractのメソッド呼び出しに変える
+      //      メソッドの戻り値を配列に入れる
+      var dummyChildminders = [
+        {
+          name: '阿部 太郎',
+          address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
+        },
+        {
+          name: '片桐 二郎',
+          address: '0x26007D2d96fBF35175CbBd613f6B575C2de8E20A'
+        },
+        {
+          name: '大谷 翔平',
+          address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
+        }
+      ];
+      setTimeout(function() {
+        utils.render(dummyChildminders, '#js-childminder-template', '#js-childminders');
+        utils.loadingOff();
+        // attachQR();
+      }, 300);
+    })();
   </script>
 </body>
 </html>

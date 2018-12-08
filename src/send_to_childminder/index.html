@@ -97,38 +97,43 @@
   </div>
 
   <script>
-    var receiverAddress = utils.urlParams().childminder_address;
-    $('.js-qr-wrapper').qrcode({
-      text: location.href
-    });
+    (function(){
+      // setting
+      var receiverAddress = utils.urlParams().childminder_address;
 
-    $('.js-amount').on('blur', function() {
-      var $this = $(this);
-      var val = $this.val();
-      $this.val(Number(val));
-    });
+      // init
+      $('.js-qr-wrapper').qrcode({
+        text: location.href
+      });
 
-    $('.js-send-trigger').on('click', function(e) {
-      e.preventDefault();
-      var amount = $('.js-amount').val();
+      $('.js-amount').on('blur', function() {
+        var $this = $(this);
+        var val = $this.val();
+        $this.val(Number(val));
+      });
 
-      if (amount === 'NaN' || !amount) {
-        alert('送る量を入力してください');
-        return;
-      }
+      $('.js-send-trigger').on('click', function(e) {
+        e.preventDefault();
+        var amount = $('.js-amount').val();
 
-      amount = Number(amount);
-      var message = $('.js-messge').val();
+        if (amount === 'NaN' || !amount) {
+          alert('送る量を入力してください');
+          return;
+        }
 
-      console.log('amount:' + amount);
-      console.log('message:' + message);
-      utils.loadingOn();
+        amount = Number(amount);
+        var message = $('.js-messge').val();
 
-      // TODO コントラクト叩く
-      setTimeout(function() {
-        utils.loadingOff();
-      }, 300);
-    });
+        console.log('amount:' + amount);
+        console.log('message:' + message);
+        utils.loadingOn();
+
+        // TODO コントラクト叩く
+        setTimeout(function() {
+          utils.loadingOff();
+        }, 300);
+      });
+    })();
   </script>
 </body>
 </html>
