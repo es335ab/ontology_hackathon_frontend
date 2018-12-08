@@ -8,7 +8,7 @@
   "scripts": {
     "scss": "node-sass -w --source-map true --output-style compressed src/scss/style.scss src/css/style.css"
   },
-  "devDependencies": {
+  "dependencies": {
     "ontology-dapi": "^0.4.6"
   }
 }
