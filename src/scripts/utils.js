@@ -1,5 +1,6 @@
 var utils = {
   urlParams: function() {
+    // ?id=hoge&name=fuga などURLパラメータをオブジェクトで返す
     var params = {};
     var paramsString = location.href.match(/\?(.*)$/);
     var queries, i, count, query;
@@ -14,5 +15,15 @@ var utils = {
     }
 
     return params;
-  }
+  },
+
+  loadingOn: function() {
+    // 画面をローディングステータスにする
+    $('#global-loading').addClass('is-active');
+  },
+
+  loadingOff: function() {
+    // 画面をローディングステータスから戻す
+    $('#global-loading').removeClass('is-active');
+  },
 };

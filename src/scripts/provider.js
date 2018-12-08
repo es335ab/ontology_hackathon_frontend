@@ -15,5 +15,4 @@ client.api.smartContract.invoke({
   gasLimit: gasLimit
 }).then(function(res) {
   console.log(res);
-  debugger;
 });
