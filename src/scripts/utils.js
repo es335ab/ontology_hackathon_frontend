@@ -26,4 +26,13 @@ var utils = {
     // 画面をローディングステータスから戻す
     $('#global-loading').removeClass('is-active');
   },
+
+  render: function(data, templateID, targetID) {
+    // jsの配列なやオブジェクトなどをpartialテンプレートに入れてrenderする
+    var template = _.template($(templateID).text());
+    var $target = $(targetID);
+
+    $target.html('');
+    $target.append(template({data: data}));
+  }
 };

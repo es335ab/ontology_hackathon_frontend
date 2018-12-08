@@ -99,16 +99,16 @@
   </script>
 
   <script>
+    // function render(data, templateID, targetID) {
+    //   var template = _.template($(templateID).text());
+    //   var $target = $(targetID);
+
+    //   $target.html('');
+    //   $target.append(template({data: data}));
+    // }
+
     var testArr = ['a', 'b'];
-    function render(data, templateID, targetID) {
-      var template = _.template($(templateID).text());
-      var $target = $(targetID);
-
-      $target.html('');
-      $target.append(template({data: data}));
-    }
-
-    render(testArr, '#test-template', '#js-render-test');
+    utils.render(testArr, '#test-template', '#js-render-test');
   </script>
 </body>
 </html>
