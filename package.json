@@ -1,0 +1,14 @@
+{
+  "name": "ontology_hackathon_frontend",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:es335ab/ontology_hackathon_frontend.git",
+  "author": "es335ab",
+  "license": "MIT",
+  "scripts": {
+    "scss": "node-sass -w --source-map true --output-style compressed src/scss/style.scss src/css/style.css"
+  },
+  "devDependencies": {
+    "ontology-dapi": "^0.4.6"
+  }
+}
