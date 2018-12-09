@@ -28,7 +28,7 @@
     <main class="l-main">
       <div class="l-block u-mt-10">
         <h1 class="block-heading inner u-pb-0">
-          ${preschool_name} の保育士一覧
+          <span id="js-preschool-name">${preschool_name}</span>の保育士一覧
         </h1>
         <div class="body">
           <div class="cassettes" id="js-childminders"></div>
@@ -49,15 +49,12 @@
 
   <script id="js-childminder-template" type="text/template">
     <% _.each(data, function(item) { %>
-      <a class="m-cassette" href="<%- 'http://' + location.host + '/send_to_childminder?childminder_address=' + item['address'] %>">
+      <a class="m-cassette" href="<%- 'http://' + location.host + '/send_to_childminder?childminder_address=' + item %>">
         <div class="inner">
           <div class="u-table">
             <div class="info">
-              <div class="lead"><%- item['name'] %></div>
-              <div class="supplyment"><%- item['address'] %></div>
+              <div class="lead"><%- item %></div>
             </div>
-<!--             <div class="qr-wrapper">
-            </div> -->
           </div>
         </div>
       </a>
@@ -67,47 +64,87 @@
   <script>
     (function(){
       // setting
-      // var contract = '39f3fb644842c808828817bd73da0946d99f237f';
-      // var method = 'Hello';
-      // var parameters = [{ type: 'Integer', value: 5 }, { type: 'Integer', value: 4 }];
-      // var gasPrice = 500;
-      // var gasLimit = 30000;
-      // function attachQR() {
-      //   $('#js-childminders').find('.m-cassette').each(function(index, element) {
-      //     var $element = $(element);
-      //     var url = $element.attr('href');
+      var preschoolId = Number(utils.urlParams()['preschool_id']);
+      var preschoolIds = [];
+      var preschoolNames = [];
 
-      //     $element.find('.qr-wrapper').qrcode({
-      //       text: url
-      //     });
-      //   });
-      // }
-
+      // ダミーの保育士さん配列
+      var childmindersByPreschoolId = [
+        'AecaeSEBkt5GcBCxwz1F41TvdjX3dnKBkJ',
+        'AQvZMDecMoCi2y4V6QKdJBtHW1eV7Vbaof',
+        'ASA4WmuuqFx63zmBsXiEF1N3pCz9cTCgsU'
+      ];
 
       // init
       utils.loadingOn();
 
       // TODO ここをcontractのメソッド呼び出しに変える
       //      メソッドの戻り値を配列に入れる
-      var dummyChildminders = [
-        {
-          name: '阿部 太郎',
-          address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
-        },
-        {
-          name: '片桐 二郎',
-          address: '0x26007D2d96fBF35175CbBd613f6B575C2de8E20A'
-        },
-        {
-          name: '大谷 翔平',
-          address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
-        }
-      ];
-      setTimeout(function() {
-        utils.render(dummyChildminders, '#js-childminder-template', '#js-childminders');
-        utils.loadingOff();
-        // attachQR();
-      }, 300);
+      // var dummyChildminders = [
+      //   {
+      //     name: '阿部 太郎',
+      //     address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
+      //   },
+      //   {
+      //     name: '片桐 二郎',
+      //     address: '0x26007D2d96fBF35175CbBd613f6B575C2de8E20A'
+      //   },
+      //   {
+      //     name: '大谷 翔平',
+      //     address: '0x10D27eC867701F5e55Aefc12E79D82e539938d0c'
+      //   }
+      // ];
+      // setTimeout(function() {
+      //   utils.render(dummyChildminders, '#js-childminder-template', '#js-childminders');
+      //   utils.loadingOff();
+      //   // attachQR();
+      // }, 300);
+      var showPreschoolIdsObj = {
+        contract: CONTRACT_ADDRESS,
+        method: 'ShowPreschoolIds',
+        gasPrice: 500,
+        gasLimit: 30000
+      };
+
+      var showPreschoolNamesObj = {
+        contract: CONTRACT_ADDRESS,
+        method: 'ShowPreschoolNames',
+        gasPrice: 500,
+        gasLimit: 30000
+      };
+
+      client.api.smartContract.invoke(showPreschoolIdsObj)
+        .then(function(res) {
+          utils.loadingOff();
+          console.log('ShowPreschoolIds');
+          console.log(res);
+
+          _.each(res.result[0], function(item) {
+            preschoolIds.push(parseInt(item));
+          });
+
+          var preschoolIdIndex = preschoolIds.indexOf(preschoolId);
+
+          utils.loadingOn();
+
+          client.api.smartContract.invoke(showPreschoolNamesObj)
+            .then(function(res) {
+              utils.loadingOff();
+              console.log('showPreschoolNamesObj');
+              console.log(res);
+
+              _.each(res.result[0], function(item) {
+                preschoolNames.push(utils.hexToString(item));
+              });
+
+              var preschoolName = preschoolNames[preschoolIdIndex];
+
+              $('#js-preschool-name').text('').text(preschoolName);
+
+              utils.render(childmindersByPreschoolId, '#js-childminder-template', '#js-childminders');
+              utils.loadingOff();
+            });
+        });
     })();
   </script>
 </body>
