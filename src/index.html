@@ -99,13 +99,19 @@
   </script>
 
   <script>
-    // function render(data, templateID, targetID) {
-    //   var template = _.template($(templateID).text());
-    //   var $target = $(targetID);
+    var contract = 'fd8d5c4e2215fb146459dfb008053b4293e7a450';
+    var method = 'ShowPreschools';
+    var gasPrice = 500;
+    var gasLimit = 300000;
 
-    //   $target.html('');
-    //   $target.append(template({data: data}));
-    // }
+    client.api.smartContract.invoke({
+      contract: contract,
+      method: method,
+      gasPrice: gasPrice,
+      gasLimit: gasLimit
+    }).then(function(res) {
+      console.log(res);
+    });
 
     var testArr = ['a', 'b'];
     utils.render(testArr, '#test-template', '#js-render-test');
