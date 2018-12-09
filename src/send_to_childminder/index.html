@@ -40,7 +40,7 @@
       <div class="l-block">
         <div class="inner">
           <h1 class="block-heading">
-            ${childminder_name} さんにontを送る
+            <span id="js-childminder-name">${childminder_name}</span> さんにontを送る
           </h1>
           <div class="body">
             <div class="block-item">
@@ -102,6 +102,7 @@
       var receiverAddress = utils.urlParams().childminder_address;
 
       // init
+      $('#js-childminder-name').text(receiverAddress);
       $('.js-qr-wrapper').qrcode({
         text: location.href
       });
@@ -128,10 +129,28 @@
         console.log('message:' + message);
         utils.loadingOn();
 
-        // TODO コントラクト叩く
-        setTimeout(function() {
-          utils.loadingOff();
-        }, 300);
+        client.api.asset.getAccount().then(function(sender) {
+          var paramsForSendTokenAndMessage = {
+            contract: CONTRACT_ADDRESS,
+            method: 'SendTokenAndMessage',
+            parameters: [
+              {type: 'ByteArray', value: client.api.utils.addressToHex(sender)},
+              {type: 'ByteArray', value: client.api.utils.addressToHex(receiverAddress)},
+              {type: 'Integer', value: amount},
+              {type: 'String', value: "message!"}],
+            gasPrice: 500,
+            gasLimit: 30000
+          };
+
+          client.api.smartContract.invoke(paramsForSendTokenAndMessage)
+            .then(function (res) {
+              console.log(res);
+              alert('感謝のメッセージとontを送信完了しました。');
+              $('.js-amount').val('');
+              $('.js-messge').val('');
+              utils.loadingOff();
+            });
+        });
       });
     })();
   </script>
